@@ -1,12 +1,17 @@
 ﻿namespace MotoApp.Repositories
 {
     using MotoApp.Entities;
-    public class GenericRepository<T>
-        where T : class, IEntity, new()
-        
-    {
+    using MotoApp.Repository;
 
+    public class ListRepository<T> : IRepository<T> where T : class, IEntity, new()
+
+    {
         protected readonly List<T> _items = new();
+
+        public IEnumerable<T> GetAll() 
+        {
+            return _items.ToList();
+        }
 
         public T GetById(int id)
         {
@@ -24,13 +29,12 @@
             _items.Remove(item);
         }
 
-
         public void Save()
         {
-            foreach (var item in _items)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in _items)
+            //{
+            //    Console.WriteLine(item);
+            //}
         }
     }
 }
